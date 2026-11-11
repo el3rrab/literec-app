@@ -31,11 +31,11 @@ macOS 15 أو أحدث · أي ماك (Apple Silicon أو Intel) · مجاني
 
 | دوس مع بعض | بيعمل إيه |
 |---|---|
-| `Ctrl + Alt + R` | تسجيل / إيقاف |
-| `Ctrl + Alt + S` | صورة للشاشة |
-| `Ctrl + Alt + D` | ارسم على الشاشة |
+| `⌃⌥R` — Control + Option + R | تسجيل / إيقاف |
+| `⌃⌥S` — Control + Option + S | صورة للشاشة |
+| `⌃⌥D` — Control + Option + D | ارسم على الشاشة |
 
-> على كيبورد ويندوز: `Alt` = Option، وزرار ويندوز = Command.
+> ⌃ = Control · ⌥ = Option · ⌘ = Command
 
 ## التثبيت
 
