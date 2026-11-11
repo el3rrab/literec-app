@@ -47,6 +47,8 @@ It's a lightweight, free alternative for the everyday things people use paid scr
 ### 📸 Screenshots + editor
 - Drag a region or **click a window** — the screenshot is **copied to the clipboard instantly**
 - Built-in editor: arrows, boxes, pen, highlight, text, **numbered steps** and **blur / pixelate** for private info
+- **Click a window to capture just that window** — even if something covers part of it
+- Works with your **keyboard's screenshot key** (e.g. Logitech) — opens LiteRec's tool instead of the Mac's
 - Optional auto-delete of old screenshots after 3 / 7 / 30 days
 
 ### ✂️ Trim, GIF & compress
@@ -94,9 +96,9 @@ Recordings are saved in **Movies → LiteRec**.
 
 **Where are my recordings saved?** In your **Movies → LiteRec** folder.
 
-## Versions
+## History
 
-See all releases and what's new: **[Releases](https://github.com/el3rrab/literec-app/releases)**
+How LiteRec grows, version by version — what was added, fixed and changed: **[HISTORY.md](HISTORY.md)** · all downloads: **[Releases](https://github.com/el3rrab/literec-app/releases)**
 
 ---
 
@@ -106,7 +108,7 @@ See all releases and what's new: **[Releases](https://github.com/el3rrab/literec
 
 **LiteRec** مسجّل شاشة وكاميرا وصور للماك — مجاني وخفيف، من شريط القوايم فوق. بيسجل الشاشة والكاميرا (حتى GoPro على USB) وصوت الجهاز والمايك، وبياخد صور وتعلّم عليها، وبترسم على الشاشة وإنت بتشرح، وبيقص ويعمل GIF. التطبيق عربي وإنجليزي.
 
-[⬇️ نزّل LiteRec](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg) · [📖 الشرح والجولة](https://el3rrab.github.io/literec-app/)
+[⬇️ نزّل LiteRec](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg) · [📖 الشرح والجولة](https://el3rrab.github.io/literec-app/) · [🕘 تاريخ النسخ](HISTORY.md)
 
 </div>
 
