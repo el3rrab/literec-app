@@ -1,63 +1,121 @@
 <div align="center">
 
-<img src="assets/icon.png" width="128" alt="LiteRec icon">
+<img src="assets/icon.png" width="128" alt="LiteRec app icon — free screen recorder for Mac">
 
-# LiteRec
+# LiteRec — Free Screen & Camera Recorder for Mac
 
-**مسجّل شاشة وكاميرا وصور للماك — خفيف ومجاني · عربي و English**
+**Record your screen and webcam, take annotated screenshots, draw on screen and make GIFs — free, lightweight, right from the macOS menu bar.**
 
-سجّل الشاشة والكاميرا، خد صور وعلّم عليها، واعمل GIF — كله من شريط القوايم فوق.
+### [⬇️ Download LiteRec for Mac (free)](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg)
 
-### [⬇️ نزّل LiteRec (آخر نسخة)](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg)
+### [📖 Interactive tour & guide](https://el3rrab.github.io/literec-app/)
 
-### [📖 جولة وشرح التطبيق · Interactive tour](https://el3rrab.github.io/literec-app/)
+macOS 15 Sequoia or later · Apple Silicon (M1/M2/M3/M4) & Intel · English & Arabic · No watermark · No account
 
-macOS 15 أو أحدث · أي ماك (Apple Silicon أو Intel) · مجاني
-
-<img src="assets/welcome.png" width="420" alt="LiteRec welcome screen">
+<img src="assets/welcome-en.png" width="420" alt="LiteRec welcome screen with keyboard shortcuts">
 
 </div>
 
 ---
 
-## بيعمل إيه
+## Why LiteRec?
 
-- 🎥 **تسجيل الشاشة** — الشاشة كلها، أو جزء تحدده بالماوس، أو نافذة. مع صوت الجهاز والمايك.
-- 📹 **تسجيل الكاميرا** — أي كاميرا USB (زي GoPro) أو كاميرا الماك، وتظهر فقاعة جوه فيديو الشاشة.
-- ⏱ **عد تنازلي** قبل التسجيل، وعلامة **● REC** على الشاشة عشان تفتكر إنك بتسجل (مش بتظهر في الفيديو).
-- ✏️ **ارسم على الشاشة وإنت بتسجل** — أسهم، مربعات، تظليل، أرقام.
-- 📸 **صور للشاشة** — بتتنسخ على طول، ومحرر فيه أسهم وكتابة وتغبيش للحاجات السرية.
-- ✂️ **قص الفيديو** من غير ما الجودة تقل، و🖼 **تحويل لـ GIF**.
+LiteRec is a **free screen recorder for macOS** that lives in your menu bar. It records your **screen, webcam, system audio and microphone** together, so you can make tutorials, demos, bug reports and video messages in seconds — without heavy software, subscriptions or watermarks.
 
-## الاختصارات
+It's a lightweight, free alternative for the everyday things people use paid screen-capture tools for: **screen recording with a webcam bubble, screenshots with arrows and blur, drawing on screen while you explain, trimming, and GIFs.**
 
-| دوس مع بعض | بيعمل إيه |
+## Features
+
+### 🎥 Screen recording
+- Record the **full screen** (any display), a **region** you drag with the mouse, or a **single window**
+- **System audio + microphone** at the same time, with a live mic level meter and a muted-mic warning
+- **Countdown** (3 / 5 / 10 s) and a red frame around the recorded region (not visible in the video)
+- Saves **MP4 (HEVC)** — small files, high quality, up to 60 fps
+
+### 📹 Webcam / camera recording
+- Works with the built-in FaceTime camera or **any USB camera, including a GoPro in webcam mode**
+- A round **camera bubble** inside the screen recording — drag it anywhere
+- The camera is also saved as its **own full-quality file**, with sound and picture in sync
+
+### ⏺ Floating REC badge
+- A small badge shows the time, what's being recorded and a stop button — **hidden from the recording**
+
+### ✏️ Draw on screen while recording
+- Arrows, boxes, pen, highlighter and numbered steps on top of any app — **visible in the video**
+- Press <kbd>Esc</kbd> and it's gone
+
+### 📸 Screenshots + editor
+- Drag a region or **click a window** — the screenshot is **copied to the clipboard instantly**
+- Built-in editor: arrows, boxes, pen, highlight, text, **numbered steps** and **blur / pixelate** for private info
+- Optional auto-delete of old screenshots after 3 / 7 / 30 days
+
+### ✂️ Trim, GIF & compress
+- **Trim** the start and end without re-encoding (no quality loss)
+- **Convert video to GIF** in one click
+- **Compress** large recordings to 1080p or 720p
+
+### 🧩 Made for everyday use
+- **Menu bar app** with a floating panel you can move anywhere
+- **English & Arabic** interface (switch in Settings)
+- Recordings are never lost — even if the app is closed mid-recording
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
 |---|---|
-| `⌃⌥R` — Control + Option + R | تسجيل / إيقاف |
-| `⌃⌥S` — Control + Option + S | صورة للشاشة |
-| `⌃⌥D` — Control + Option + D | ارسم على الشاشة |
+| <kbd>⌃⌥R</kbd> (Control + Option + R) | Start / stop recording |
+| <kbd>⌃⌥S</kbd> (Control + Option + S) | Screenshot |
+| <kbd>⌃⌥D</kbd> (Control + Option + D) | Draw on screen |
+| <kbd>Esc</kbd> | Cancel / leave drawing |
+| <kbd>⌘Z</kbd> / <kbd>⌘S</kbd> | Editor: undo / save & copy |
 
-> ⌃ = Control · ⌥ = Option · ⌘ = Command
+## Install
 
-## التثبيت
+1. [Download **LiteRec.dmg**](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg) and open it.
+2. Drag **LiteRec** onto the **Applications** folder.
+3. Open it. The first time, macOS says it can't verify the app (it isn't from the App Store):
+   go to **System Settings → Privacy & Security → Open Anyway**. You only do this once.
+4. LiteRec appears as a ⏺ icon in the **menu bar** next to the clock (not in the Dock).
+5. On the first recording, allow **Screen Recording**, **Microphone** and **Camera**.
 
-1. نزّل **LiteRec.dmg** من [الزرار اللي فوق](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg) وافتحه.
-2. اسحب **LiteRec** على فولدر **Applications**.
-3. افتحه من Applications. أول مرة الماك هيقول إنه مش قادر يتأكد من التطبيق (لأنه مش من الـ App Store):
-   **System Settings ← Privacy & Security ← انزل لتحت ← Open Anyway**. ده بيحصل مرة واحدة بس.
-4. التطبيق بيظهر كأيقونة ⏺ فوق في شريط القوايم جنب الساعة (مش في الـ Dock).
-5. أول تسجيل: اسمح بإذن تسجيل الشاشة والمايك والكاميرا، وبعد إذن الشاشة دوس «اقفل وافتح تاني».
+Recordings are saved in **Movies → LiteRec**.
 
-الملفات بتتحفظ في **Movies ← LiteRec**.
+## FAQ
 
-## كل النسخ
+**Is LiteRec really free?** Yes — completely free, no watermark, no account, no time limit.
 
-[صفحة النسخ](https://github.com/el3rrab/literec-app/releases)
+**Does it work on Apple Silicon and Intel Macs?** Yes, it's a universal app for macOS 15 or later.
+
+**Can I record my screen and webcam at the same time?** Yes — choose *Both*. The camera shows as a bubble in the screen video and is also saved as a separate file.
+
+**Can I record internal (system) audio on Mac?** Yes — LiteRec records system audio and your microphone together, with no extra drivers.
+
+**Can I use a GoPro as a webcam?** Yes — connect it over USB in webcam mode and pick it in the Camera menu.
+
+**Where are my recordings saved?** In your **Movies → LiteRec** folder.
+
+## Versions
+
+See all releases and what's new: **[Releases](https://github.com/el3rrab/literec-app/releases)**
+
+---
+
+<div dir="rtl">
+
+### بالعربي
+
+**LiteRec** مسجّل شاشة وكاميرا وصور للماك — مجاني وخفيف، من شريط القوايم فوق. بيسجل الشاشة والكاميرا (حتى GoPro على USB) وصوت الجهاز والمايك، وبياخد صور وتعلّم عليها، وبترسم على الشاشة وإنت بتشرح، وبيقص ويعمل GIF. التطبيق عربي وإنجليزي.
+
+[⬇️ نزّل LiteRec](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg) · [📖 الشرح والجولة](https://el3rrab.github.io/literec-app/)
+
+</div>
 
 ---
 
 <div align="center">
 
-صُنع بـ ❤️ بواسطة **إسلام العراب** · Islam El3rrab — [github.com/el3rrab](https://github.com/el3rrab)
+Made with ❤️ by **Islam El3rrab** (إسلام العراب) — [github.com/el3rrab](https://github.com/el3rrab)
+
+<sub>Keywords: free screen recorder for Mac, macOS screen recording, screen and webcam recorder, record screen with audio on Mac, GoPro webcam recorder, screenshot tool for Mac, annotate screenshots, draw on screen, video to GIF, menu bar recorder, مسجل شاشة للماك</sub>
 
 </div>
