@@ -4,11 +4,13 @@
 
 # LiteRec
 
-**مسجّل شاشة وكاميرا وصور للماك — خفيف ومجاني**
+**مسجّل شاشة وكاميرا وصور للماك — خفيف ومجاني · عربي و English**
 
 سجّل الشاشة والكاميرا، خد صور وعلّم عليها، واعمل GIF — كله من شريط القوايم فوق.
 
 ### [⬇️ نزّل LiteRec (آخر نسخة)](https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg)
+
+### [📖 جولة وشرح التطبيق · Interactive tour](https://el3rrab.github.io/literec-app/)
 
 macOS 15 أو أحدث · أي ماك (Apple Silicon أو Intel) · مجاني
 

@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LiteRec — مسجّل شاشة وكاميرا للماك</title>
+<meta name="description" content="LiteRec: مسجّل شاشة وكاميرا وصور للماك، خفيف ومجاني. Free screen & camera recorder for macOS.">
+<link rel="icon" href="assets/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e1012; --bg2: #15181b; --card: rgba(255,255,255,.055); --line: rgba(255,255,255,.08);
+    --text: #f2f3f4; --sub: rgba(255,255,255,.6); --dim: rgba(255,255,255,.35);
+    --red: #ff4545; --mint: #78d6ba; --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.7 "IBM Plex Sans Arabic", system-ui, -apple-system, sans-serif; }
+  html[lang=ar] .en, html[lang=en] .ar { display: none !important; }
+  a { color: var(--mint); text-decoration: none; }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 30px; margin: 0 0 8px; }
+  .lead { color: var(--sub); margin: 0 0 32px; max-width: 640px; }
+  kbd { font: 600 14px/1 ui-monospace, SFMono-Regular, Menlo, monospace; background: var(--card);
+        border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 7px; padding: 5px 8px; direction: ltr; display: inline-block; }
+
+  /* شريط فوق */
+  nav { position: sticky; top: 0; z-index: 10; backdrop-filter: blur(14px); background: rgba(14,16,18,.75); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; gap: 18px; height: 60px; }
+  nav .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--text); }
+  nav .brand img { width: 28px; height: 28px; }
+  nav .links { display: flex; gap: 18px; margin-inline-start: auto; }
+  nav .links a { color: var(--sub); font-size: 14px; }
+  nav .links a:hover { color: var(--text); }
+  .lang { background: var(--card); border: 1px solid var(--line); color: var(--text); border-radius: 999px;
+          padding: 6px 14px; font: inherit; font-size: 14px; cursor: pointer; }
+
+  /* البداية */
+  .hero { padding: 84px 0 64px; text-align: center; border-top: 0; }
+  .hero img.icon { width: 132px; height: 132px; filter: drop-shadow(0 18px 40px rgba(255,69,69,.25)); }
+  .hero h1 { font-size: 52px; line-height: 1.15; margin: 18px 0 10px; }
+  .hero p { color: var(--sub); font-size: 19px; margin: 0 auto 30px; max-width: 620px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; border-radius: 999px; padding: 14px 28px;
+         font-weight: 600; font-size: 17px; border: 0; cursor: pointer; }
+  .btn.red { background: var(--red); color: #fff; }
+  .btn.ghost { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+  .hero .meta { margin-top: 16px; color: var(--dim); font-size: 14px; }
+  .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 36px; }
+  .chip { background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; font-size: 14px; color: var(--sub); }
+
+  /* خطوات */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .step { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
+  .step .n { width: 32px; height: 32px; border-radius: 50%; background: var(--red); color: #fff; font-weight: 700;
+             display: grid; place-items: center; margin-bottom: 12px; }
+  .step h3 { margin: 0 0 6px; font-size: 18px; }
+  .step p { margin: 0; color: var(--sub); font-size: 15px; }
+  .path { display: inline-block; margin-top: 10px; background: var(--card); border-radius: 8px; padding: 6px 10px; font-size: 13px; color: var(--text); }
+
+  /* الجولة التفاعلية */
+  .tour { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 36px; align-items: start; }
+  .explain { position: sticky; top: 90px; background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; min-height: 260px; }
+  .explain .count { color: var(--mint); font-size: 14px; font-weight: 600; }
+  .explain h3 { font-size: 24px; margin: 6px 0 10px; }
+  .explain p { color: var(--sub); margin: 0 0 10px; }
+  .explain .keys { margin-top: 6px; }
+  .explain .nav { display: flex; gap: 10px; margin-top: 20px; }
+  .dots { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 18px; }
+  .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--line); cursor: pointer; }
+  .dots span.on { background: var(--mint); }
+
+  /* نسخة من لوحة التطبيق */
+  .panel { direction: rtl; width: 100%; max-width: 380px; border-radius: 20px; padding: 18px; position: relative;
+           background: linear-gradient(160deg, rgba(40,44,48,.92), rgba(22,25,28,.94));
+           border: 1px solid rgba(255,255,255,.1); box-shadow: 0 30px 80px rgba(0,0,0,.55);
+           font-size: 15px; user-select: none; }
+  .panel [data-step] { position: relative; border-radius: 12px; cursor: pointer; transition: box-shadow .15s, background .15s; }
+  .panel [data-step]:hover { box-shadow: 0 0 0 2px rgba(120,214,186,.45); }
+  .panel [data-step].active { box-shadow: 0 0 0 2px var(--mint), 0 0 24px rgba(120,214,186,.35); }
+  .panel [data-step].active:not(.p-rec):not(.p-sq) { background: rgba(120,214,186,.06); }
+  .p-head { display: flex; align-items: center; gap: 10px; padding: 4px; }
+  .p-head img { width: 26px; height: 26px; }
+  .p-head b { font-size: 18px; }
+  .p-status { margin-inline-start: auto; display: flex; align-items: center; gap: 6px; color: var(--sub); font-size: 13px; }
+  .p-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); }
+  .p-float { width: 26px; height: 26px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font-size: 13px; }
+  .p-hero { display: flex; justify-content: space-between; align-items: flex-end; margin: 12px 0 14px; padding: 4px; }
+  .p-time { direction: ltr; font: 600 44px/1 ui-rounded, "SF Pro Rounded", system-ui; color: rgba(255,255,255,.35); letter-spacing: 1px; }
+  .p-sub { color: var(--sub); font-size: 12px; }
+  .p-src { text-align: end; color: var(--sub); font-size: 11px; }
+  .p-src div { font-size: 18px; color: var(--text); letter-spacing: 4px; }
+  .p-actions { display: flex; gap: 10px; margin-bottom: 16px; }
+  .p-rec { flex: 1; height: 46px; border-radius: 999px; background: var(--red); display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; }
+  .p-sq { width: 54px; height: 46px; border-radius: 12px; background: var(--card); display: grid; place-items: center; font-size: 11px; line-height: 1.2; text-align: center; }
+  .p-sq span { font-size: 17px; display: block; }
+  .sep { height: 1px; background: var(--line); margin: 6px 0; }
+  .p-row { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 2px 4px; }
+  .p-row .ic { width: 22px; text-align: center; color: var(--sub); }
+  .p-row .t { font-weight: 500; }
+  .p-row .s { color: var(--sub); font-size: 12px; }
+  .p-row .end { margin-inline-start: auto; }
+  .seg { display: flex; background: var(--card); border-radius: 8px; padding: 2px; font-size: 13px; }
+  .seg span { padding: 4px 11px; border-radius: 6px; color: var(--sub); }
+  .seg span.on { background: rgba(255,255,255,.14); color: var(--text); }
+  .pick { background: rgba(255,255,255,.1); border-radius: 7px; padding: 4px 12px; font-size: 13px; direction: ltr; }
+  .meter { width: 140px; height: 18px; border-radius: 4px; background: var(--card); overflow: hidden; direction: ltr; }
+  .meter i { display: block; height: 100%; width: 45%; background: var(--mint); animation: lvl 1.4s ease-in-out infinite alternate; }
+  @keyframes lvl { from { width: 12%; } to { width: 62%; } }
+  .p-quick { display: flex; padding: 12px 0; }
+  .p-quick div { flex: 1; text-align: center; font-size: 11px; color: var(--text); }
+  .p-quick div span { display: block; font-size: 19px; margin-bottom: 4px; }
+  .p-quick div.off { color: var(--dim); }
+  .p-files { padding: 10px 4px; }
+  .p-files .hd { display: flex; color: var(--sub); font-size: 13px; margin-bottom: 8px; }
+  .p-files .hd a { margin-inline-start: auto; }
+  .p-file { display: flex; align-items: center; gap: 12px; padding: 5px 0; }
+  .p-file .th { width: 30px; height: 30px; border-radius: 7px; background: var(--card); display: grid; place-items: center; font-size: 13px; }
+  .p-file .nm { font-size: 14px; }
+  .p-file .sz { color: var(--sub); font-size: 11px; }
+  .p-file .act { margin-inline-start: auto; display: flex; gap: 10px; align-items: center; color: var(--sub); }
+  .p-file .act b { width: 26px; height: 26px; border-radius: 50%; background: var(--card); display: grid; place-items: center; font-size: 11px; color: var(--text); }
+  .p-foot { display: flex; align-items: center; gap: 14px; padding-top: 14px; }
+  .p-open { flex: 1; height: 44px; border-radius: 999px; background: rgba(255,255,255,.92); color: #111; font-weight: 600; display: grid; place-items: center; }
+  .p-foot span { color: var(--sub); font-size: 17px; }
+  .p-credit { color: var(--dim); font-size: 11px; margin-top: 12px; }
+  .p-credit b { color: var(--sub); font-weight: 500; }
+
+  /* المزايا */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .feat { background: var(--bg2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .feat .e { font-size: 26px; }
+  .feat h3 { margin: 8px 0 6px; font-size: 19px; }
+  .feat p, .feat li { color: var(--sub); font-size: 15px; margin: 0; }
+  .feat ul { margin: 8px 0 0; padding-inline-start: 18px; }
+
+  /* الاختصارات */
+  table { width: 100%; border-collapse: collapse; background: var(--bg2); border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
+  td { padding: 16px 20px; border-bottom: 1px solid var(--line); }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { width: 220px; }
+  .keyname { color: var(--dim); font-size: 13px; margin-inline-start: 8px; }
+
+  /* أسئلة */
+  details { background: var(--bg2); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { color: var(--sub); margin: 10px 0 0; }
+
+  footer { padding: 48px 0 64px; text-align: center; color: var(--sub); border-top: 1px solid var(--line); }
+  footer b { color: var(--text); }
+
+  @media (max-width: 900px) {
+    .tour { grid-template-columns: minmax(0, 1fr); }
+    body { overflow-x: hidden; }
+    .hero .btn { margin: 4px; }
+    .explain { position: static; order: -1; }
+    .panel { margin: 0 auto; }
+    nav .links { display: none; }
+    .hero h1 { font-size: 38px; }
+  }
+  @media (max-width: 520px) {
+    .panel { padding: 14px; font-size: 14px; }
+    .seg { font-size: 12px; }
+    .seg span { padding: 4px 7px; }
+    .meter { width: 80px; }
+    .pick { padding: 4px 8px; }
+    .p-time { font-size: 36px; }
+    .p-row .s { display: none; }
+    .steps, .grid { grid-template-columns: minmax(0, 1fr); }
+    td:first-child { width: auto; }
+    .keyname { display: block; margin: 6px 0 0; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="assets/icon.png" alt="">LiteRec</a>
+    <div class="links">
+      <a href="#install"><span class="ar">التثبيت</span><span class="en">Install</span></a>
+      <a href="#tour"><span class="ar">جولة</span><span class="en">Tour</span></a>
+      <a href="#features"><span class="ar">المزايا</span><span class="en">Features</span></a>
+      <a href="#keys"><span class="ar">الاختصارات</span><span class="en">Shortcuts</span></a>
+      <a href="#faq"><span class="ar">أسئلة</span><span class="en">FAQ</span></a>
+    </div>
+    <button class="lang" id="lang">English</button>
+  </div>
+</nav>
+
+<header class="hero wrap" id="top">
+  <img class="icon" src="assets/icon.png" alt="LiteRec">
+  <h1>LiteRec</h1>
+  <p class="ar">مسجّل شاشة وكاميرا وصور للماك — خفيف ومجاني. كله من شريط القوايم فوق جنب الساعة.</p>
+  <p class="en">A light, free screen &amp; camera recorder for Mac — right from the menu bar.</p>
+  <a class="btn red" href="https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg">
+    ⬇︎ <span class="ar">نزّل LiteRec</span><span class="en">Download LiteRec</span>
+  </a>
+  <a class="btn ghost" href="#tour"><span class="ar">جولة في التطبيق</span><span class="en">Take the tour</span></a>
+  <div class="meta"><span class="ar">macOS 15 أو أحدث · Apple Silicon و Intel · مجاني</span><span class="en">macOS 15 or later · Apple Silicon &amp; Intel · Free</span></div>
+  <div class="chips">
+    <span class="chip">🎥 <span class="ar">الشاشة</span><span class="en">Screen</span></span>
+    <span class="chip">📹 <span class="ar">الكاميرا</span><span class="en">Camera</span></span>
+    <span class="chip">📸 <span class="ar">صور ومحرر</span><span class="en">Screenshots &amp; editor</span></span>
+    <span class="chip">✏️ <span class="ar">رسم على الشاشة</span><span class="en">Draw on screen</span></span>
+    <span class="chip">✂️ <span class="ar">قص</span><span class="en">Trim</span></span>
+    <span class="chip">🖼 GIF</span>
+  </div>
+</header>
+
+<section id="install">
+  <div class="wrap">
+    <h2><span class="ar">التثبيت — ٤ خطوات</span><span class="en">Install — 4 steps</span></h2>
+    <p class="lead"><span class="ar">مرة واحدة بس، وبعدها التطبيق يفتح على طول.</span><span class="en">One time only — after that it just opens.</span></p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div>
+        <h3><span class="ar">نزّل وافتح</span><span class="en">Download &amp; open</span></h3>
+        <p><span class="ar">نزّل ملف <b>LiteRec.dmg</b> وافتحه.</span><span class="en">Download <b>LiteRec.dmg</b> and open it.</span></p></div>
+      <div class="step"><div class="n">2</div>
+        <h3><span class="ar">اسحبه على Applications</span><span class="en">Drag to Applications</span></h3>
+        <p><span class="ar">اسحب أيقونة LiteRec على فولدر Applications اللي جنبها.</span><span class="en">Drag the LiteRec icon onto the Applications folder.</span></p></div>
+      <div class="step"><div class="n">3</div>
+        <h3><span class="ar">اسمح بفتحه (أول مرة)</span><span class="en">Allow it (first time)</span></h3>
+        <p><span class="ar">الماك هيقول إنه مش قادر يتأكد منه لأنه مش من الـ App Store. روح:</span><span class="en">macOS will say it can't verify it (not from the App Store). Go to:</span></p>
+        <span class="path">System Settings ← Privacy &amp; Security ← Open Anyway</span></div>
+      <div class="step"><div class="n">4</div>
+        <h3><span class="ar">لاقيه فوق</span><span class="en">Find it up top</span></h3>
+        <p><span class="ar">الأيقونة ⏺ بتظهر في شريط القوايم فوق جنب الساعة — مش في الـ Dock. أول تسجيل هيطلب إذن الشاشة والمايك والكاميرا.</span><span class="en">The ⏺ icon appears in the menu bar next to the clock — not in the Dock. The first recording asks for screen, mic &amp; camera access.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tour">
+  <div class="wrap">
+    <h2><span class="ar">جولة في اللوحة</span><span class="en">Panel tour</span></h2>
+    <p class="lead"><span class="ar">دوس على أي حتة في اللوحة عشان تعرف بتعمل إيه — أو امشي خطوة خطوة.</span><span class="en">Click any part of the panel to see what it does — or go step by step.</span></p>
+    <div class="tour">
+      <div class="panel" id="panel">
+        <div class="p-head" data-step="head">
+          <img src="assets/icon.png" alt=""><b>LiteRec</b>
+          <span class="p-status"><i></i>جاهز</span>
+          <span class="p-float">⧉</span>
+        </div>
+        <div class="p-hero" data-step="time">
+          <div><div class="p-time">00:00:00</div><div class="p-sub">جاهز</div></div>
+          <div class="p-src">بيسجل<div>🖥📹🎙</div></div>
+        </div>
+        <div class="p-actions">
+          <div class="p-rec" data-step="rec">⏺ ابدأ التسجيل</div>
+          <div class="p-sq" data-step="shot"><span>📸</span>صورة</div>
+          <div class="p-sq" data-step="draw"><span>✏️</span>رسم</div>
+        </div>
+        <div class="sep"></div>
+        <div class="p-row" data-step="source"><span class="ic">▣</span><div><div class="t">المصدر</div></div>
+          <div class="end seg"><span class="on">الاتنين</span><span>كاميرا</span><span>شاشة</span></div></div>
+        <div class="p-row" data-step="area"><span class="ic">⌗</span><div><div class="t">المساحة</div><div class="s">الشاشة الرئيسية</div></div>
+          <div class="end seg"><span class="on">الشاشة</span><span>جزء</span><span>نافذة</span></div></div>
+        <div class="p-row" data-step="camera"><span class="ic">📹</span><div><div class="t">الكاميرا</div><div class="s">جودة متوسطة</div></div>
+          <div class="end pick">HERO12 Black ⌄</div></div>
+        <div class="p-row" data-step="mic"><span class="ic">🎙</span><div><div class="t">المايك</div><div class="s">RØDE PodMic USB</div></div>
+          <div class="end meter"><i></i></div></div>
+        <div class="p-row" data-step="countdown"><span class="ic">⏱</span><div><div class="t">عد تنازلي</div></div>
+          <div class="end seg"><span>بدون</span><span class="on">3</span><span>5</span><span>10</span></div></div>
+        <div class="sep"></div>
+        <div class="p-quick" data-step="quick">
+          <div><span>🎙</span>المايك</div><div><span>🔊</span>صوت الجهاز</div><div><span>👤</span>الفقاعة</div>
+          <div class="off"><span>👁</span>معاينة</div><div><span>⌨️</span>اختصارات</div>
+        </div>
+        <div class="sep"></div>
+        <div class="p-files" data-step="files">
+          <div class="hd">آخر التسجيلات<a>الكل</a></div>
+          <div class="p-file"><span class="th">🎞</span><div><div class="nm">شاشة · النهارده ٤:٤٠ م</div><div class="sz">82 MB</div></div><span class="act"><b>▶</b>•••</span></div>
+          <div class="p-file"><span class="th">📹</span><div><div class="nm">كاميرا · النهارده ٤:٤٠ م</div><div class="sz">52 MB</div></div><span class="act"><b>▶</b>•••</span></div>
+        </div>
+        <div class="sep"></div>
+        <div class="p-foot" data-step="foot"><div class="p-open">افتح فولدر التسجيلات</div><span>⚙︎</span><span>ⓘ</span><span>⏻</span></div>
+        <div class="p-credit">صُنع بواسطة <b>إسلام العراب</b></div>
+      </div>
+
+      <div class="explain" id="explain">
+        <div class="count" id="ex-count"></div>
+        <h3 id="ex-title"></h3>
+        <p id="ex-body"></p>
+        <div class="keys" id="ex-keys"></div>
+        <div class="nav">
+          <button class="btn ghost" id="prev" style="padding:10px 18px;font-size:15px"><span class="ar">→ السابق</span><span class="en">← Back</span></button>
+          <button class="btn red" id="next" style="padding:10px 18px;font-size:15px"><span class="ar">التالي ←</span><span class="en">Next →</span></button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="wrap">
+    <h2><span class="ar">بيعمل إيه</span><span class="en">What it does</span></h2>
+    <p class="lead"><span class="ar">كل حاجة محتاجها عشان تشرح أو تسجّل أو تبعت لقطة — من غير برامج تقيلة.</span><span class="en">Everything to explain, record or share a capture — without heavy software.</span></p>
+    <div class="grid">
+      <div class="feat"><div class="e">🎥</div>
+        <h3><span class="ar">تسجيل الشاشة</span><span class="en">Screen recording</span></h3>
+        <ul class="ar"><li>الشاشة كلها (أي شاشة)، أو جزء تحدده بالماوس، أو نافذة.</li><li>صوت الجهاز والمايك مع بعض.</li><li>عد تنازلي، وإطار أحمر حوالين الجزء (مش بيظهر في الفيديو).</li></ul>
+        <ul class="en"><li>Full screen (any display), a region you drag, or a window.</li><li>System audio + microphone together.</li><li>Countdown, and a red frame around the region (not recorded).</li></ul></div>
+      <div class="feat"><div class="e">📹</div>
+        <h3><span class="ar">الكاميرا</span><span class="en">Camera</span></h3>
+        <ul class="ar"><li>أي كاميرا USB (زي GoPro) أو كاميرا الماك.</li><li>فقاعة مدورة جوه فيديو الشاشة، تحركها بالماوس.</li><li>والكاميرا كمان في ملف لوحدها بجودة كاملة.</li></ul>
+        <ul class="en"><li>Any USB camera (e.g. GoPro) or the built-in one.</li><li>A round bubble inside the screen video — drag it anywhere.</li><li>Plus the camera in its own full-quality file.</li></ul></div>
+      <div class="feat"><div class="e">⏺</div>
+        <h3><span class="ar">علامة REC</span><span class="en">REC badge</span></h3>
+        <p><span class="ar">وإنت بتسجل بتظهر علامة صغيرة فيها الوقت وبتسجل إيه، وزرار إيقاف — ومش بتظهر في الفيديو.</span><span class="en">While recording, a small badge shows the time, what's being recorded and a stop button — hidden from the video.</span></p></div>
+      <div class="feat"><div class="e">📸</div>
+        <h3><span class="ar">صور ومحرر</span><span class="en">Screenshots &amp; editor</span></h3>
+        <p><span class="ar">اسحب جزء أو دوس على نافذة، الصورة تتنسخ على طول. والمحرر فيه: سهم، مربع، قلم، تظليل، كتابة، أرقام خطوات، وتغبيش للحاجات السرية.</span><span class="en">Drag a region or click a window — it's copied instantly. The editor has arrows, boxes, pen, highlight, text, numbered steps and blur for secrets.</span></p></div>
+      <div class="feat"><div class="e">✏️</div>
+        <h3><span class="ar">ارسم على الشاشة</span><span class="en">Draw on screen</span></h3>
+        <p><span class="ar">وإنت بتشرح: أسهم ومربعات وتظليل فوق أي حاجة — وبتظهر في الفيديو. <kbd>Esc</kbd> وتختفي.</span><span class="en">While explaining: arrows, boxes and highlights over anything — visible in the video. <kbd>Esc</kbd> to clear.</span></p></div>
+      <div class="feat"><div class="e">✂️</div>
+        <h3><span class="ar">قص و GIF وضغط</span><span class="en">Trim, GIF &amp; compress</span></h3>
+        <p><span class="ar">قص البداية والنهاية من غير ما الجودة تقل، حوّل لـ GIF، أو صغّر الحجم — من زرار ••• جنب التسجيل.</span><span class="en">Trim without losing quality, turn into a GIF, or shrink the size — from the ••• next to any recording.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="keys">
+  <div class="wrap">
+    <h2><span class="ar">الاختصارات</span><span class="en">Shortcuts</span></h2>
+    <p class="lead"><span class="ar">بتشتغل من أي مكان، حتى واللوحة مقفولة.</span><span class="en">Work from anywhere, even with the panel closed.</span></p>
+    <table>
+      <tr><td><kbd>⌃⌥R</kbd><span class="keyname">Control + Option + R</span></td><td><span class="ar">تسجيل / إيقاف (ووقت العد = إلغاء)</span><span class="en">Record / stop (during countdown = cancel)</span></td></tr>
+      <tr><td><kbd>⌃⌥S</kbd><span class="keyname">Control + Option + S</span></td><td><span class="ar">صورة للشاشة</span><span class="en">Screenshot</span></td></tr>
+      <tr><td><kbd>⌃⌥D</kbd><span class="keyname">Control + Option + D</span></td><td><span class="ar">ارسم على الشاشة</span><span class="en">Draw on screen</span></td></tr>
+      <tr><td><kbd>Esc</kbd></td><td><span class="ar">إلغاء / خروج من الرسم</span><span class="en">Cancel / leave drawing</span></td></tr>
+      <tr><td><kbd>⌘Z</kbd> <kbd>⌘S</kbd></td><td><span class="ar">في المحرر: رجوع / حفظ ونسخ</span><span class="en">In the editor: undo / save &amp; copy</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2><span class="ar">أسئلة شائعة</span><span class="en">FAQ</span></h2>
+    <details><summary><span class="ar">التطبيق مش ظاهر فوق؟</span><span class="en">I can't see the app?</span></summary>
+      <p><span class="ar">LiteRec بيعيش في شريط القوايم فوق جنب الساعة (مش في الـ Dock). لو مش باين: System Settings ← Menu Bar، واتأكد إن LiteRec مسموح.</span><span class="en">LiteRec lives in the menu bar next to the clock (not the Dock). If hidden: System Settings → Menu Bar and allow LiteRec.</span></p></details>
+    <details><summary><span class="ar">التسجيل طالع من غير صوت؟</span><span class="en">No sound in my recording?</span></summary>
+      <p><span class="ar">بص على الخط الأخضر جنب «المايك» في اللوحة واتكلم. لو المايك مكتوم من الماك، التطبيق هيقولك وفيه زرار «فك الكتم». وتقدر تغيّر المايك من الإعدادات.</span><span class="en">Watch the green meter next to "Mic" and speak. If the mic is muted in macOS, the app tells you and offers "Unmute". You can switch mics in Settings.</span></p></details>
+    <details><summary><span class="ar">الملفات بتتحفظ فين؟</span><span class="en">Where are files saved?</span></summary>
+      <p><span class="ar">في Movies ← LiteRec. والصور ممكن تتمسح لوحدها بعد ٧ أيام (من الإعدادات).</span><span class="en">In Movies → LiteRec. Screenshots can auto-delete after 7 days (in Settings).</span></p></details>
+    <details><summary><span class="ar">هل التطبيق مجاني فعلاً؟</span><span class="en">Is it really free?</span></summary>
+      <p><span class="ar">أيوه، مجاني بالكامل ومن غير علامة مائية.</span><span class="en">Yes — completely free, no watermark.</span></p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a class="btn red" href="https://github.com/el3rrab/literec-app/releases/latest/download/LiteRec.dmg">⬇︎ <span class="ar">نزّل LiteRec</span><span class="en">Download LiteRec</span></a>
+    <p style="margin-top:28px"><span class="ar">صُنع بـ ❤️ بواسطة</span><span class="en">Made with ❤️ by</span> <b>إسلام العراب · Islam El3rrab</b> — <a href="https://github.com/el3rrab">github.com/el3rrab</a></p>
+  </div>
+</footer>
+
+<script>
+const STEPS = [
+  { id: "head", ar: ["الراس", "حالة التطبيق: نقطة خضرا = جاهز، حمرا = بيسجل. والزرار ⧉ على الطرف بيفصل اللوحة وتبقى شباك عائم تسحبه لأي حتة على الشاشة."],
+                en: ["Header", "App status: green dot = ready, red = recording. The ⧉ button detaches the panel into a floating window you can drag anywhere."] },
+  { id: "time", ar: ["الوقت", "عداد التسجيل، وتحته آخر حالة. وعلى الجنب أيقونات بتوريك هتسجل إيه: الشاشة، الكاميرا، المايك."],
+                en: ["Timer", "Recording time and the latest status. The icons show what will be recorded: screen, camera, mic."] },
+  { id: "rec",  ar: ["ابدأ التسجيل", "يبدأ التسجيل بالإعدادات اللي تحت. لو المساحة «جزء» هتحدده بالماوس، وبعدين العد التنازلي. ودوس تاني عشان توقف وتحفظ."],
+                en: ["Start recording", "Starts with the settings below. With \"Region\" you drag the area first, then the countdown. Press again to stop and save."], keys: "⌃⌥R" },
+  { id: "shot", ar: ["صورة", "اسحب جزء أو دوس على نافذة — الصورة تتنسخ على طول (الزقها بـ ⌘V) وتفتح في المحرر."],
+                en: ["Screenshot", "Drag a region or click a window — it's copied right away (paste with ⌘V) and opens in the editor."], keys: "⌃⌥S" },
+  { id: "draw", ar: ["رسم", "ارسم فوق أي حاجة على الشاشة: أسهم، مربعات، تظليل، أرقام. بيظهر في الفيديو، و Esc يمسحه."],
+                en: ["Draw", "Draw over anything: arrows, boxes, highlights, numbers. It shows in the video; Esc clears it."], keys: "⌃⌥D" },
+  { id: "source", ar: ["المصدر", "هتسجل إيه: الشاشة بس، الكاميرا بس، أو الاتنين مع بعض (الكاميرا تظهر فقاعة جوه فيديو الشاشة، وكمان في ملف لوحدها)."],
+                en: ["Source", "What to record: screen only, camera only, or both (the camera appears as a bubble in the screen video, and in its own file)."] },
+  { id: "area", ar: ["المساحة", "الشاشة كلها، أو جزء تحدده بالماوس، أو نافذة معينة. لو عندك أكتر من شاشة تختار منين من الإعدادات."],
+                en: ["Area", "Full screen, a region you drag, or one window. With several displays, pick one in Settings."] },
+  { id: "camera", ar: ["الكاميرا", "اختار الكاميرا: كاميرا الماك أو أي كاميرا USB زي GoPro. الجودة بتتغير من الإعدادات."],
+                en: ["Camera", "Pick the camera: the built-in one or any USB camera like a GoPro. Quality is in Settings."] },
+  { id: "mic", ar: ["المايك", "الخط الأخضر بيتحرك مع صوتك — لو ما اتحركش يبقى الصوت مش واصل. كليك يمين على الصف عشان تغيّر المايك."],
+                en: ["Microphone", "The green bar moves with your voice — if it doesn't, no sound is coming in. Right-click the row to switch mics."] },
+  { id: "countdown", ar: ["عد تنازلي", "٣ أو ٥ أو ١٠ ثواني قبل ما التسجيل يبدأ، عشان تلحق تجهز. Esc يلغيه."],
+                en: ["Countdown", "3, 5 or 10 seconds before recording starts, so you can get ready. Esc cancels."] },
+  { id: "quick", ar: ["زراير سريعة", "شغّل واقفل بضغطة: المايك، صوت الجهاز، فقاعة الكاميرا، معاينة الكاميرا، والاختصارات. المنوّر = شغال."],
+                en: ["Quick toggles", "One-tap on/off: mic, system audio, camera bubble, camera preview and shortcuts. Bright = on."] },
+  { id: "files", ar: ["آخر التسجيلات", "▶ يشغّل (أو يفتح المحرر للصور). و ••• فيها: قص، GIF، ضغط، نسخ، Finder، وسلة."],
+                en: ["Recent recordings", "▶ plays (or opens the editor for images). ••• has trim, GIF, compress, copy, Finder and trash."] },
+  { id: "foot", ar: ["تحت", "يفتح فولدر التسجيلات. ⚙︎ الإعدادات (الجودة، الضغط، الصور...)، ⓘ عن التطبيق، ⏻ خروج."],
+                en: ["Bottom", "Opens the recordings folder. ⚙︎ Settings (quality, compression, screenshots…), ⓘ About, ⏻ Quit."] },
+];
+
+let cur = 0;
+const $ = (id) => document.getElementById(id);
+const lang = () => document.documentElement.lang;
+
+function show(i) {
+  cur = (i + STEPS.length) % STEPS.length;
+  const s = STEPS[cur], t = s[lang()];
+  document.querySelectorAll("#panel [data-step]").forEach(el => el.classList.toggle("active", el.dataset.step === s.id));
+  $("ex-count").textContent = (lang() === "ar" ? "خطوة " : "Step ") + (cur + 1) + " / " + STEPS.length;
+  $("ex-title").textContent = t[0];
+  $("ex-body").textContent = t[1];
+  $("ex-keys").innerHTML = s.keys ? `<kbd>${s.keys}</kbd>` : "";
+  [...$("dots").children].forEach((d, k) => d.classList.toggle("on", k === cur));
+}
+
+STEPS.forEach((s, k) => { const d = document.createElement("span"); d.onclick = () => show(k); $("dots").appendChild(d); });
+document.querySelectorAll("#panel [data-step]").forEach(el =>
+  el.addEventListener("click", () => show(STEPS.findIndex(s => s.id === el.dataset.step))));
+$("next").onclick = () => show(cur + 1);
+$("prev").onclick = () => show(cur - 1);
+
+function setLang(l) {
+  document.documentElement.lang = l;
+  document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+  $("lang").textContent = l === "ar" ? "English" : "العربية";
+  document.title = l === "ar" ? "LiteRec — مسجّل شاشة وكاميرا للماك" : "LiteRec — screen & camera recorder for Mac";
+  try { localStorage.setItem("lang", l); } catch (e) {}
+  show(cur);
+}
+$("lang").onclick = () => setLang(lang() === "ar" ? "en" : "ar");
+
+let start = "ar";
+try { start = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lang") || "ar"; } catch (e) {}
+const m = location.hash.match(/^#step-(\d+)/);
+if (m) cur = Math.max(0, Math.min(STEPS.length - 1, +m[1] - 1));
+setLang(start === "en" ? "en" : "ar");
+</script>
+</body>
+</html>
